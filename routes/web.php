@@ -16,7 +16,7 @@ use App\Http\Controllers\ProductController;
 Route::get('/welcome', function () {
     return view('welcome');
 });
-
+ 
 
 
 Route::get('/product', [ProductController::class, 'index']);
@@ -24,4 +24,7 @@ Route::get('/product/{id}', [ProductController::class, 'index']);
 Route::get('/delete/{id}', [ProductController::class, 'delete']);
 Route::get('/add', [ProductController::class, 'getadd']);
 Route::post('/add', [ProductController::class, 'postadd']);
+Route::get('/edit/{id}', [ProductController::class, 'edit']);
+Route::post('/update', [ProductController::class, 'update']);
+
 

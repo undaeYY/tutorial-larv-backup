@@ -14,7 +14,7 @@ table, th, td {
 </head>
 <body>
 
-<h2>Add a border to a table:</h2>
+<h2>SHOW DATABASE</h2>
 
 <table>
   <tr>
@@ -23,15 +23,17 @@ table, th, td {
     <th>gia sach</th>
     <th>thao tac</th>
   </tr>
+  @if(isset($data))
   @foreach($data as $row)
   <tr>
     <td>{{$row->tensach}}</td>
     <td>{{$row->phukien}}</td>
     <td>{{$row->giasach}}</td>
-    <td> <a href="{{url('product')}}">EDIT</a>
+    <td> <a href="{{url('edit/'.$row['id'])}}">EDIT</a>
     <a href="{{url('delete/'.$row['id'])}}">DELETE</a></td>  
   </tr>
   @endforeach
+  @endif
 </table>
 </body>
 </html>

@@ -49,5 +49,40 @@ class ProductController extends Controller
         return redirect('product');
     }
 
+    public function edit($id){
+        $thuvien = new DBModel();
+        $data = $thuvien->find($id);
+
+        /*if(!$data){
+            $data['tensach'] = "";
+            $data['giasach'] = "";
+            $data['phukien'] = "";
+        }*/
+
+        return view('edit',['data' => $data]);
+    }
+
+    public function update(Request $req){
+        $validate = $req->validate([
+            'tens' => 'required||string',
+            'gias' => 'required||string',
+            'phuk' => 'required||string',
+        ],[
+            'tens.required' => 'vui long khong de trong!',
+            'gias.required' => 'vui long khong de trong!',
+            'phuk.required' => 'vui long khong de trong!',
+        ]);
+
+        $thuvien = new DBModel();
+        $data = $thuvien->find($req->id);
+
+        if($data){
+            $thuvien->tensach = $req->tens;
+            $thuvien->giasach = $req->gias;
+            $thuvien->phukien = $req->phuk;
+            $thuvien->save();
+        }
+        return redirect('product');
+    }
 
 }
