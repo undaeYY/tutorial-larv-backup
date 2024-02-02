@@ -64,9 +64,9 @@ class ProductController extends Controller
 
     public function update(Request $req){
         $validate = $req->validate([
-            'tens' => 'required||string',
-            'gias' => 'required||string',
-            'phuk' => 'required||string',
+            'tens' => 'required|string',
+            'gias' => 'required|string',
+            'phuk' => 'required|string',
         ],[
             'tens.required' => 'vui long khong de trong!',
             'gias.required' => 'vui long khong de trong!',
