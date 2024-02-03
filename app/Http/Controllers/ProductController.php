@@ -12,7 +12,8 @@ class ProductController extends Controller
         if($id){
             $data = DBModel::where('id',$id)->get();
         }else{
-            $data = DBModel::all();
+            $data = DB::table('thuvien')->get();
+            //$data = DBModel::all();
         }
         return view('form', ['data' => $data]);
     }
@@ -33,31 +34,32 @@ class ProductController extends Controller
             'phuk.required' => 'vui long khong de trong!',
         ]);
 
-        $thuvien = new DBModel();
+        /*$thuvien = new DBModel();
         $thuvien->tensach = $req->tens;
         $thuvien->giasach = $req->gias;
         $thuvien->phukien = $req->phuk;
-        $thuvien->save();
+        $thuvien->save();*/
+        DB::table('thuvien')->insert([
+            'tensach' => $req->tens,
+            'giasach' => $req->gias,
+            'phukien' => $req->phuk
+        ]);
         return redirect('product');
     }
 
     public function delete($id){
-        $thuvien = new DBModel();
+    /*    $thuvien = new DBModel();
         $data = $thuvien->find($id);
-        $data->delete();
+        $data->delete();*/
+        DB::table('thuvien')->where('id',$id)->delete();
 
         return redirect('product');
     }
 
     public function edit($id){
-        $thuvien = new DBModel();
-        $data = $thuvien->find($id);
-
-        /*if(!$data){
-            $data['tensach'] = "";
-            $data['giasach'] = "";
-            $data['phukien'] = "";
-        }*/
+       /* $thuvien = new DBModel();
+        $data = $thuvien->find($id);*/
+        $data = DB::table('thuvien')->find($id);
 
         return view('edit',['data' => $data]);
     }
@@ -73,7 +75,7 @@ class ProductController extends Controller
             'phuk.required' => 'vui long khong de trong!',
         ]);
 
-        $thuvien = new DBModel();
+    /*    $thuvien = new DBModel();
         $data = $thuvien->find($req->id);
 
         if($data){
@@ -81,7 +83,12 @@ class ProductController extends Controller
             $thuvien->giasach = $req->gias;
             $thuvien->phukien = $req->phuk;
             $thuvien->save();
-        }
+        }*/
+        DB::table('thuvien')->where('id',$req->id)->update([
+            'tensach' => $req->tens,
+            'giasach' => $req->gias,
+            'phukien' => $req->phuk
+        ]);
         return redirect('product');
     }
 

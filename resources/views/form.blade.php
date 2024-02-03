@@ -15,7 +15,6 @@ table, th, td {
 <body>
 
 <h2>SHOW DATABASE</h2>
-
 <table>
   <tr>
     <th>ten sach</th>
@@ -29,11 +28,13 @@ table, th, td {
     <td>{{$row->tensach}}</td>
     <td>{{$row->phukien}}</td>
     <td>{{$row->giasach}}</td>
-    <td> <a href="{{url('edit/'.$row['id'])}}">EDIT</a>
-    <a href="{{url('delete/'.$row['id'])}}">DELETE</a></td>  
+    <td><a href="{{url('edit/'.$row->id)}}">EDIT</a>
+    <a href="{{url('delete/'.$row->id)}}">DELETE</a>
+    </td>  
   </tr>
   @endforeach
   @endif
 </table>
+<h3><a href="{{url('add')}}">THEM</a></h3>
 </body>
 </html>
